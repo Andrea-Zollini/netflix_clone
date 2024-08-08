@@ -12,7 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('media', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
+
+
+            $table->string('slug')->unique();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->string('genre')->nullable();
+            $table->date('release_date')->nullable();
+            $table->string('poster_path')->nullable();
+            $table->string('tmdb_id')->unique();
+
+
             $table->timestamps();
         });
     }
