@@ -7,7 +7,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Guest/Index');
-});
+})->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profiles', [UserProfileController::class, 'index'])->name('profiles.index');
