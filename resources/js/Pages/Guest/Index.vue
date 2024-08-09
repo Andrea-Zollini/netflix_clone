@@ -1,8 +1,38 @@
 <script setup>
 import Container from "@/Components/ui/Container.vue";
 import Header from "@/Partials/Header.vue";
+import Footer from "@/Partials/Footer.vue";
 import { Link } from "@inertiajs/vue3";
 import Image from "@/Components/ui/Image.vue";
+import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
+import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/vue/24/outline";
+
+const faqs = [
+    {
+        question: "Cos'è Netflix?",
+        answer: "Netflix è un servizio di streaming che offre una varietà di serie TV, film, documentari pluripremiati e tanto altro su una vasta gamma di dispositivi connessi a Internet. Guarda quello che vuoi, quando vuoi. Il tutto a una quota mensile ridotta. C'è sempre qualcosa di nuovo da scoprire: aggiungiamo nuovi film e serie TV ogni settimana! ",
+    },
+    {
+        question: "Quanto costa Netflix?",
+        answer: "Guarda Netflix su smartphone, tablet, Smart TV, laptop o dispositivi per lo streaming, il tutto per un importo mensile fisso. Piani da 5,49 € a 17,99 € al mese. Nessun costo aggiuntivo, nessun contratto.",
+    },
+    {
+        question: "Dove posso guardare Netflix?",
+        answer: "Guarda Netflix dove vuoi, quando vuoi. Accedi al tuo account per guardare subito Netflix dal tuo computer su netflix.com oppure da qualsiasi dispositivo connesso a Internet che supporta l'app Netflix, come smart TV, smartphone, tablet, lettori multimediali per streaming e console per videogiochi. Con l'app per iOS o Android puoi anche scaricare i tuoi programmi preferiti. Usa la funzionalità di download per guardare i contenuti mentre sei in viaggio e senza connessione a Internet. Porta Netflix sempre con te.",
+    },
+    {
+        question: "Come posso disdire?",
+        answer: "Netflix è flessibile. Nessun contratto fastidioso e nessun impegno. Puoi facilmente disdire il tuo contratto online con due clic. Nessuna penale: attiva o disdici il tuo account in qualsiasi momento.",
+    },
+    {
+        question: "Cosa posso guardare su Netflix?",
+        answer: "Netflix ha un nutrito catalogo di lungometraggi, documentari, serie TV, anime, originali Netflix pluripremiati e tanto altro. Guarda tutto quello che vuoi, in qualsiasi momento.",
+    },
+    {
+        question: "Netflix è adatto ai bambini?",
+        answer: "L'area Netflix Bambini, già inclusa nell'abbonamento, offre ai genitori un maggiore controllo sui contenuti e ai più piccoli uno spazio dedicato dove guardare serie TV e film per tutta la famiglia. I profili Bambini hanno un filtro famiglia con PIN che ti permette di limitare l'accesso ai contenuti in base alla fascia d'età e bloccare la visione di titoli specifici.",
+    },
+];
 </script>
 <template>
     <div
@@ -859,12 +889,78 @@ import Image from "@/Components/ui/Image.vue";
     </section>
 
     <section class="section-border py-9">
-        <Container> Faq </Container>
+        <Container>
+            <div class="">
+                <div
+                    class="px-6 py-24 mx-auto max-w-7xl sm:py-32 lg:px-8 lg:py-40"
+                >
+                    <div class="max-w-4xl mx-auto divide-y divide-white/10">
+                        <h2
+                            class="text-2xl font-bold leading-10 tracking-tight text-white"
+                        >
+                            Frequently asked questions
+                        </h2>
+                        <dl class="mt-10 space-y-6 divide-y divide-white/10">
+                            <Disclosure
+                                as="div"
+                                v-for="faq in faqs"
+                                :key="faq.question"
+                                class="pt-6"
+                                v-slot="{ open }"
+                            >
+                                <dt>
+                                    <DisclosureButton
+                                        class="flex items-start justify-between w-full text-left text-white"
+                                    >
+                                        <span
+                                            class="text-base font-semibold leading-7"
+                                            >{{ faq.question }}</span
+                                        >
+                                        <span
+                                            class="flex items-center ml-6 h-7"
+                                        >
+                                            <PlusSmallIcon
+                                                v-if="!open"
+                                                class="w-6 h-6"
+                                                aria-hidden="true"
+                                            />
+                                            <MinusSmallIcon
+                                                v-else
+                                                class="w-6 h-6"
+                                                aria-hidden="true"
+                                            />
+                                        </span>
+                                    </DisclosureButton>
+                                </dt>
+                                <DisclosurePanel as="dd" class="pr-12 mt-2">
+                                    <p
+                                        class="text-base leading-7 text-gray-300"
+                                    >
+                                        {{ faq.answer }}
+                                    </p>
+                                </DisclosurePanel>
+                            </Disclosure>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <p class="text-2xl mb-9">
+                    Vuoi guardare Netflix? Inserisci l'indirizzo email per
+                    abbonarti o riattivare il tuo abbonamento.
+                </p>
+                <Link
+                    :href="route('register')"
+                    class="inline-block px-6 py-2 font-bold text-white transition duration-300 bg-red-600 rounded-lg shadow-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+                >
+                    Inizia
+                </Link>
+            </div>
+        </Container>
     </section>
 
-    <footer>
-        <Container>Footer</Container>
-    </footer>
+    <Footer />
 </template>
 
 <style scoped>
